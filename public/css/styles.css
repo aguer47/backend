@@ -55,7 +55,7 @@ nav ul {
   padding: 0;
   margin: 1rem 0;
   display: flex;
-  background-color: blue;
+  background-color: #0033cc;
 }
 
 nav li {
@@ -176,9 +176,14 @@ footer {
   padding-top: 1rem;
 }
 
-/* =========================
-   MEDIA QUERY
-========================= */
+.upgrades {
+  order: 2;
+}
+
+.reviews {
+  order: 1;
+}
+/* MEDIA QUERY */
 
 @media screen and (min-width: 768px) {
 
@@ -189,14 +194,15 @@ footer {
 
   .upgrades {
     flex: 1;
+    order: 1;
   }
 
   .reviews {
     flex: 1;
+    order: 2;
   }
 
   .reviews h2 {
     margin-top: 0;
   }
-
 }
