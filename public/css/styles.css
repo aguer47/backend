@@ -132,7 +132,7 @@ nav ul li:hover {
 }
 
 .upgrade-item {
-  background-color: #00a8c6;
+  background-color: #006d8f;
   text-align: center;
   padding: 1rem;
 }
@@ -147,6 +147,7 @@ nav ul li:hover {
   color: #ffffff;
   text-decoration: underline;
   font-weight: bold;
+  display: block;
 }
 
 
