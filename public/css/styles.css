@@ -6,10 +6,6 @@
 }
 
 
-* {
-  box-sizing: border-box;
-}
-
 body {
   margin: 0;
   font-family: "Segoe UI", Arial, Helvetica, sans-serif;
@@ -55,7 +51,7 @@ nav ul {
   padding: 0;
   margin: 1rem 0;
   display: flex;
-  background-color: #0033cc;
+  background-color: #003366cc;
 }
 
 nav li {
@@ -71,7 +67,7 @@ nav ul li {
 }
 
 nav ul li:hover {
-  background-color: rgb(179, 236, 20);
+  background-color: #005fa3;
 }
 
 /*  HERO SECTION */
@@ -96,7 +92,7 @@ nav ul li:hover {
 
 .hero-text h2 {
   margin-top: 0;
-  color: #00a8c6;
+  color: #004e64;
 }
 
 .hero-text ul {
@@ -106,7 +102,7 @@ nav ul li:hover {
 .btn {
   display: inline-block;
   margin-top: 0.5rem;
-  background-color: #00a8c6;
+  background-color: #006d8f;
   color: #ffffff;
   padding: 0.5rem 1rem;
   text-decoration: none;
