@@ -40,7 +40,7 @@ header h1 {
 
 header a {
   text-decoration: none;
-  color: #333;
+  color: #000;
   font-weight: bold;
 }
 
@@ -69,6 +69,7 @@ nav ul li {
 nav ul li:hover {
   background-color: #005fa3;
 }
+
 
 /*  HERO SECTION */
 
@@ -173,6 +174,15 @@ footer {
   padding-top: 1rem;
 }
 
+
+footer a {
+  color: #004e64;
+  font-weight: bold;
+}
+
+footer a:hover {
+  color: #006d8f;
+}
 .upgrades {
   order: 2;
 }
@@ -202,4 +212,20 @@ footer {
   .reviews h2 {
     margin-top: 0;
   }
+}
+
+
+.vehicle-detail {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.vehicle-detail img {
+  max-width: 400px;
+  width: 100%;
+}
+
+.vehicle-info {
+  flex: 1;
 }

@@ -67,3 +67,26 @@ Util.buildClassificationGrid = async function(data){
   }
   return grid
 }
+
+function buildVehicleDetail(data) {
+  return `
+  <div class="vehicle-detail">
+
+    <img src="${data.inv_image}" alt="${data.inv_make} ${data.inv_model}">
+
+    <div class="vehicle-info">
+      <h2>${data.inv_year} ${data.inv_make} ${data.inv_model}</h2>
+
+      <p><strong>Price:</strong> $${Number(data.inv_price).toLocaleString()}</p>
+
+      <p><strong>Mileage:</strong> ${Number(data.inv_miles).toLocaleString()} miles</p>
+
+      <p>${data.inv_description}</p>
+
+      <p>Color: ${data.inv_color}</p>
+
+    </div>
+
+  </div>
+  `
+}

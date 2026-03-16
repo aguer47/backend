@@ -19,4 +19,36 @@ invCont.buildByClassificationId = async function (req, res, next) {
   })
 }
 
+
+
+/* ***************************
+ *  Build vehicle detail view
+ * ************************** */
+invCont.buildByInventoryId = async function (req, res, next) {
+  try {
+
+    const inv_id = req.params.inv_id
+
+    const data = await invModel.getInventoryById(inv_id)
+
+    const vehicleHTML = utilities.buildVehicleDetail(data)
+
+    let nav = await utilities.getNav()
+
+    res.render("./inventory/detail", {
+      title: data.inv_make + " " + data.inv_model,
+      nav,
+      vehicleHTML,
+    })
+
+  } catch (error) {
+    next(error)
+  }
+}
+
+// error trigger function for testing error.
+invCont.triggerError = function (req, res, next) {
+  throw new Error("Intentional server error")
+}
+
   module.exports = invCont
