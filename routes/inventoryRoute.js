@@ -11,6 +11,6 @@ router.get("/type/:classificationId", utilities.handleErrors(invController.build
 router.get("/detail/:inv_id", utilities.handleErrors(invController.buildByInventoryId))
 
 // Route to trigger intentional error
-router.get("/error", invController.triggerError)
+router.get("/error", utilities.handleErrors(invController.triggerError))
 
 module.exports = router

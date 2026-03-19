@@ -33,8 +33,6 @@ Util.getNav = async function (req, res, next) {
  **************************************** */
 Util.handleErrors = fn => (req, res, next) => Promise.resolve(fn(req, res, next)).catch(next)
 
-module.exports = Util
-
 /* **************************************
 * Build the classification view HTML
 * ************************************ */
@@ -68,25 +66,35 @@ Util.buildClassificationGrid = async function(data){
   return grid
 }
 
-function buildVehicleDetail(data) {
+Util.buildVehicleDetail = function (data) {
   return `
   <div class="vehicle-detail">
 
-    <img src="${data.inv_image}" alt="${data.inv_make} ${data.inv_model}">
+    <div class="vehicle-image">
+      <img src="${data.inv_image}" alt="${data.inv_make} ${data.inv_model}">
+    </div>
 
     <div class="vehicle-info">
       <h2>${data.inv_year} ${data.inv_make} ${data.inv_model}</h2>
 
-      <p><strong>Price:</strong> $${Number(data.inv_price).toLocaleString()}</p>
+      <p class="price"><strong>Price:</strong> ${new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: 'USD',
+      }).format(data.inv_price)}</p>
 
-      <p><strong>Mileage:</strong> ${Number(data.inv_miles).toLocaleString()} miles</p>
+      <p class="mileage"><strong>Mileage:</strong> ${new Intl.NumberFormat('en-US').format(
+        data.inv_miles
+      )} miles</p>
 
-      <p>${data.inv_description}</p>
+      <p class="description"><strong>Description:</strong> ${data.inv_description}</p>
 
-      <p>Color: ${data.inv_color}</p>
+      <p class="details"><strong>Color:</strong> ${data.inv_color}</p>
+      <p class="details"><strong>Body Style:</strong> ${data.inv_body_style || 'Unknown'}</p>
 
     </div>
 
   </div>
   `
 }
+
+module.exports = Util
