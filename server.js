@@ -55,9 +55,9 @@ app.use(async (err, req, res, next) => {
 /* ******************************************
  * Server host name and port
  * ******************************************/
-const HOST = "localhost"
-const PORT = 3000
+const PORT = process.env.PORT || 3000;
+const HOST = "0.0.0.0";
 
-app.listen(PORT, () => {
-  console.log(`trial app listening on ${HOST}:${PORT}`)
-})
+app.listen(PORT, HOST, () => {
+  console.log(`Server running on ${HOST}:${PORT}`);
+});
