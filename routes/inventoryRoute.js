@@ -13,4 +13,5 @@ router.get("/detail/:inv_id", utilities.handleErrors(invController.buildByInvent
 // Route to trigger intentional error
 router.get("/error", utilities.handleErrors(invController.triggerError))
 
+
 module.exports = router

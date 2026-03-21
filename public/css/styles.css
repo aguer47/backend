@@ -230,3 +230,27 @@ footer a:hover {
 .vehicle-info {
   flex: 1;
 }
+
+
+/* form */
+form {
+  max-width: 400px;
+  margin: auto;
+}
+
+div {
+  margin-bottom: 15px;
+}
+
+input {
+  width: 100%;
+  padding: 8px;
+}
+
+input:required:invalid {
+  border: 2px solid black;
+}
+
+input:required:valid {
+  border: 2px solid green;
+}

@@ -7,7 +7,12 @@ const expressLayouts = require("express-ejs-layouts")
 const app = express()
 
 const utilities = require("./utilities/") 
+
+const accountRoute = require("./routes/accountRoute")
+
 app.use(express.static("public"))
+
+app.use(express.urlencoded({ extended: true }))
 
 // Set view engine
 app.set("view engine", "ejs")
@@ -31,6 +36,8 @@ app.get("/", utilities.handleErrors(baseController.buildHome))
 
 // Inventory routes
 app.use("/inv", inventoryRoute)
+
+app.use("/account", accountRoute)
 
 // File Not Found Route - must be last route in list
 app.use(async (req, res, next) => {
