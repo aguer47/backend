@@ -254,3 +254,100 @@ input:required:invalid {
 input:required:valid {
   border: 2px solid green;
 }
+
+/* FORM */
+
+/* Container */
+.form-container {
+  max-width: 400px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Form title spacing */
+.form-container h1 {
+  text-align: center;
+}
+
+/* Link text */
+.form-link {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+/* Form layout */
+.account-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* Input groups */
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Labels */
+.form-group label {
+  font-weight: bold;
+  margin-bottom: 0.3rem;
+}
+
+/* Hint text */
+.form-hint {
+  font-size: 0.8rem;
+  color: #666;
+  margin-bottom: 0.3rem;
+}
+
+/* Inputs */
+.account-form input {
+  padding: 0.6rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  transition: border 0.2s;
+}
+
+.account-form input:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+/* Button */
+.btn-primary {
+  margin-top: 1rem;
+  padding: 0.7rem;
+  background-color: #0056b3;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.btn-primary:hover {
+  background-color: #0056b3;
+}
+
+/* Flash messages */
+.notice {
+  background-color: #d4edda;
+  color: #155724;
+  padding: 10px;
+  margin-bottom: 1rem;
+  border-radius: 6px;
+}
+
+.error {
+  background-color: #f8d7da;
+  color: #721c24;
+  padding: 10px;
+  margin-bottom: 1rem;
+  border-radius: 6px;
+}

@@ -1,32 +1,42 @@
-<h1>Register</h1>
+<h1><%= title %></h1>
 
-<% if (errors) { %>
-<ul class="notice">
-    <% errors.array().forEach(error => { %>
-    <li><%= error.msg %></li>
-    <% }) %>
-</ul>
-<% } %>
-<p>Already have an account? <a href="/account/login">Login here</a></p>
+<%- messages() %>
 
-<form method="post" action="/account/register">
+<div class="form-container">
 
-    <label>First Name:</label>
-    <input type="text" name="account_firstname" required>
+    <p class="form-link">
+        Already have an account?
+        <a href="/account/login">Login here</a>
+    </p>
 
-    <label>Last Name:</label>
-    <input type="text" name="account_lastname" required>
+    <form method="post" action="/account/register" class="account-form">
 
-    <label>Email:</label>
-    <input type="email" name="account_email" required>
+        <div class="form-group">
+            <label for="account_firstname">First Name</label>
+            <input type="text" id="account_firstname" name="account_firstname" required>
+        </div>
 
-    <label>Password:</label>
-    <span>
-        Must be at least 12 characters, include uppercase, lowercase, number, and special character
-    </span>
-    <input type="password" name="account_password" required
-        pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{12,}$">
+        <div class="form-group">
+            <label for="account_lastname">Last Name</label>
+            <input type="text" id="account_lastname" name="account_lastname" required>
+        </div>
 
-    <button type="submit">Register</button>
+        <div class="form-group">
+            <label for="account_email">Email</label>
+            <input type="email" id="account_email" name="account_email" required>
+        </div>
 
-</form>
+        <div class="form-group">
+            <label for="account_password">Password</label>
+            <small class="form-hint">
+                Must be at least 12 characters, include uppercase, lowercase, number, and special character
+            </small>
+            <input type="password" id="account_password" name="account_password" required
+                pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{12,}$">
+        </div>
+
+        <button type="submit" class="btn-primary">Register</button>
+
+    </form>
+
+</div>
