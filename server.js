@@ -74,10 +74,21 @@ app.use(async (req, res, next) => {
 * Place after all other middleware
 *************************/
 app.use(async (err, req, res, next) => {
-  let nav = await utilities.getNav()
   console.error(`Error at: "${req.originalUrl}": ${err.message}`)
-  if(err.status == 404){ message = err.message} else {message = 'Oh no! There was a crash. Maybe try a different route?'}
-  res.render("errors/error", {
+  
+  // Don't try to get nav if there's a database error
+  let nav = '<nav><ul><li><a href="/">Home</a></li></ul></nav>'
+  
+  try {
+    nav = await utilities.getNav()
+  } catch (navError) {
+    // Use basic nav if database is down
+    console.log('Database down, using basic navigation')
+  }
+  
+  let message = err.status == 404 ? err.message : 'Oh no! There was a crash. Maybe try a different route?'
+  
+  res.status(err.status || 500).render("errors/error", {
     title: err.status || 'Server Error',
     message,
     nav
