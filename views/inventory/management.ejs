@@ -1,0 +1,24 @@
+<%- include('../partials/header') %>
+
+<main class="inventory-management">
+    <h1>Inventory Management</h1>
+
+    <div class="flash-message">
+        <%- messages() %>
+    </div>
+
+    <nav class="management-links">
+        <p>
+            <a href="/inv/add-classification" class="btn btn-primary">
+                Add New Classification
+            </a>
+        </p>
+        <p>
+            <a href="/inv/add-inventory" class="btn btn-primary">
+                Add New Inventory Item
+            </a>
+        </p>
+    </nav>
+</main>
+
+<%- include('../partials/footer') %>

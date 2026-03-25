@@ -5,7 +5,6 @@
   box-sizing: border-box;
 }
 
-
 body {
   margin: 0;
   font-family: "Segoe UI", Arial, Helvetica, sans-serif;
@@ -16,13 +15,21 @@ body {
   line-height: 1.6;
 }
 
-
 .page-wrapper {
   background-color: #ffffff;
-  max-width: 1000px;
+  max-width: 95%;
   margin: 1rem auto;
   padding: 1rem;
   border-radius: 8px;
+  box-sizing: border-box;
+}
+
+@media screen and (max-width: 768px) {
+  .page-wrapper {
+    max-width: 98%;
+    margin: 0.5rem auto;
+    padding: 0.5rem;
+  }
 }
 
 /* HEADER */
@@ -52,10 +59,24 @@ nav ul {
   margin: 1rem 0;
   display: flex;
   background-color: black;
+  flex-wrap: wrap;
 }
 
 nav li {
   flex: 1;
+  min-width: 120px;
+}
+
+@media screen and (max-width: 768px) {
+  nav ul {
+    flex-direction: column;
+    flex-wrap: nowrap;
+  }
+  
+  nav li {
+    flex: none;
+    min-width: auto;
+  }
 }
 
 nav ul li a {
@@ -70,7 +91,6 @@ nav ul li:hover {
   background-color: #005fa3;
   color: #ffffff;
 }
-
 
 /*  HERO SECTION */
 
@@ -121,8 +141,6 @@ nav ul li:hover {
   margin-top: 2rem;
 }
 
-
-
 .upgrades h2 {
   margin-bottom: 1rem;
 }
@@ -152,7 +170,6 @@ nav ul li:hover {
   display: block;
 }
 
-
 .reviews h2 {
   margin-top: 2rem;
 }
@@ -175,7 +192,6 @@ footer {
   padding-top: 1rem;
 }
 
-
 footer a {
   color: #004e64;
   font-weight: bold;
@@ -194,7 +210,6 @@ footer a:hover {
 /* MEDIA QUERY */
 
 @media screen and (min-width: 768px) {
-
   .home-bottom {
     display: flex;
     gap: 2rem;
@@ -215,7 +230,6 @@ footer a:hover {
   }
 }
 
-
 .vehicle-detail {
   display: flex;
   gap: 20px;
@@ -232,21 +246,6 @@ footer a:hover {
 }
 
 
-/* form */
-form {
-  max-width: 400px;
-  margin: auto;
-}
-
-div {
-  margin-bottom: 15px;
-}
-
-input {
-  width: 100%;
-  padding: 8px;
-}
-
 input:required:invalid {
   border: 2px solid black;
 }
@@ -255,9 +254,7 @@ input:required:valid {
   border: 2px solid green;
 }
 
-/* FORM */
 
-/* Container */
 .form-container {
   max-width: 400px;
   margin: 2rem auto;
@@ -267,31 +264,75 @@ input:required:valid {
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
+
+.add-inventory {
+  max-width: 100%;
+  padding: 1rem;
+}
+
+.add-inventory .inventory-form {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+  background: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
+}
+
+/* Mobile responsive styles */
+@media screen and (max-width: 768px) {
+  .add-inventory .inventory-form {
+    max-width: 100%;
+    padding: 1rem;
+    margin: 0;
+  }
+  
+  .page-wrapper {
+    max-width: 98%;
+    margin: 0.5rem auto;
+    padding: 0.5rem;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .add-inventory .inventory-form {
+    padding: 0.5rem;
+  }
+  
+  .add-inventory .inventory-form input,
+  .add-inventory .inventory-form textarea,
+  .add-inventory .inventory-form select {
+    padding: 0.6rem;
+    min-height: 40px;
+  }
+}
+
 /* Form title spacing */
 .form-container h1 {
   text-align: center;
 }
 
-/* Link text */
+
 .form-link {
   text-align: center;
   margin-bottom: 1rem;
 }
 
-/* Form layout */
+
 .account-form {
   display: flex;
   flex-direction: column;
   gap: 1rem;
 }
 
-/* Input groups */
+
 .form-group {
   display: flex;
   flex-direction: column;
 }
 
-/* Labels */
+
 .form-group label {
   font-weight: bold;
   margin-bottom: 0.3rem;
@@ -304,18 +345,41 @@ input:required:valid {
   margin-bottom: 0.3rem;
 }
 
-/* Inputs */
-.account-form input {
-  padding: 0.6rem;
+
+.account-form input,
+.inventory-form input,
+.inventory-form textarea,
+.inventory-form select {
+  padding: 0.8rem;
   border-radius: 6px;
   border: 1px solid #ccc;
   font-size: 1rem;
   transition: border 0.2s;
+  width: 100%;
+  box-sizing: border-box;
+  min-height: 44px; 
 }
 
-.account-form input:focus {
+.account-form input:focus,
+.inventory-form input:focus,
+.inventory-form textarea:focus,
+.inventory-form select:focus {
   border-color: #007bff;
   outline: none;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.25);
+}
+
+
+.inventory-form textarea {
+  min-height: 100px;
+  resize: vertical;
+  font-family: inherit;
+}
+
+
+.inventory-form select {
+  cursor: pointer;
+  background-color: white;
 }
 
 /* Button */
@@ -335,7 +399,7 @@ input:required:valid {
   background-color: #0056b3;
 }
 
-/* Flash messages */
+
 .notice {
   background-color: #d4edda;
   color: #155724;
@@ -350,4 +414,17 @@ input:required:valid {
   padding: 10px;
   margin-bottom: 1rem;
   border-radius: 6px;
+}
+
+/* management */
+.management-links {
+  max-width: 400px;
+  margin: 2rem auto;
+  text-align: center;
+}
+
+.management-links a {
+  display: block;
+  margin: 1rem 0;
+  text-decoration: none;
 }

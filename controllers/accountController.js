@@ -7,64 +7,58 @@ const accountController = {}
  *  Deliver Register View
  * *************************************** */
 accountController.buildRegister = async function (req, res, next) {
-  let nav = await utilities.getNav()
-  res.render("account/register", {
-    title: "Register",
-    nav,
-    errors: null,
-  })
+  try {
+    let nav = await utilities.getNav()
+    res.render("account/register", {
+      title: "Register",
+      nav,
+      errors: null,
+    })
+  } catch (error) {
+    next(error)
+  }
 }
 
 /* ****************************************
  *  Deliver Login View
  * *************************************** */
 accountController.buildLogin = async function (req, res, next) {
-  let nav = await utilities.getNav()
-  res.render("account/login", {
-    title: "Login",
-    nav,
-    errors: null,
-  })
+  try {
+    let nav = await utilities.getNav()
+    res.render("account/login", {
+      title: "Login",
+      nav,
+      errors: null,
+    })
+  } catch (error) {
+    next(error)
+  }
 }
 
 /* ****************************************
  *  Process Registration
  * *************************************** */
-accountController.registerAccount = async function (req, res) {
+accountController.registerAccount = async function (req, res, next) {
+  try {
+    let nav = await utilities.getNav()
+    const { account_firstname, account_lastname, account_email, account_password } = req.body
 
-  let nav = await utilities.getNav()
-
-  const {
-    account_firstname,
-    account_lastname,
-    account_email,
-    account_password
-  } = req.body
-
-  const regResult = await accountModel.registerAccount(
-    account_firstname,
-    account_lastname,
-    account_email,
-    account_password
-  )
-
-  if (regResult) {
-    req.flash(
-      "notice",
-      `Congratulations, you're registered ${account_firstname}. Please log in.`
+    const regResult = await accountModel.registerAccount(
+      account_firstname,
+      account_lastname,
+      account_email,
+      account_password
     )
 
-    return res.status(201).render("account/login", {
-      title: "Login",
-      nav,
-    })
-  } else {
-    req.flash("error", "Sorry, the registration failed.")
-
-    return res.status(501).render("account/register", {
-      title: "Register",
-      nav,
-    })
+    if (regResult) {
+      req.flash("notice", `Congratulations, you're registered ${account_firstname}. Please log in.`)
+      return res.status(201).render("account/login", { title: "Login", nav, errors: null })
+    } else {
+      req.flash("error", "Sorry, the registration failed.")
+      return res.status(501).render("account/register", { title: "Register", nav, errors: null })
+    }
+  } catch (error) {
+    next(error)
   }
 }
 
