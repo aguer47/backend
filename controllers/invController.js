@@ -213,7 +213,7 @@ invCont.getInventoryJSON = async (req, res, next) => {
  *  Delete Inventory Item
  * ************************** */
 invCont.deleteInventory = async (req, res, next) => {
-  const inv_id = parseInt(req.params.inventory_id)
+  const inv_id = parseInt(req.body.inv_id) // Get from form body, not URL params
   const result = await invModel.deleteInventory(inv_id)
   
   if (result) {
@@ -239,12 +239,14 @@ invCont.editInventoryView = async function (req, res, next) {
   let nav = await utilities.getNav()
   const itemData = await invModel.getInventoryById(inv_id)
   console.log('Item data:', itemData)
-  const classificationSelect = await utilities.buildClassificationList(itemData.classification_id)
+  const classificationList = await utilities.buildClassificationList(itemData.classification_id)
+  const classificationSelect = classificationList
   const itemName = `${itemData.inv_make} ${itemData.inv_model}`
   res.render("./inventory/edit-inventory", {
     title: "Edit " + itemName,
     nav,
-    classificationSelect: classificationSelect,
+    classificationSelect,
+    classificationList,
     errors: null,
     inv_id: itemData.inv_id,
     inv_make: itemData.inv_make,
@@ -257,6 +259,34 @@ invCont.editInventoryView = async function (req, res, next) {
     inv_miles: itemData.inv_miles,
     inv_color: itemData.inv_color,
     classification_id: itemData.classification_id
+  })
+}
+
+/* ***************************
+ *  Build Delete Confirmation View
+ * ************************** */
+invCont.buildDeleteView = async function (req, res, next) {
+  const inv_id = parseInt(req.params.inventory_id)
+  let nav = await utilities.getNav()
+  const itemData = await invModel.getInventoryById(inv_id)
+  
+  if (!itemData) {
+    return next({ status: 404, message: "Vehicle not found." })
+  }
+
+  const itemName = `${itemData.inv_make} ${itemData.inv_model}`
+  res.render("./inventory/delete-confirm", {
+    title: "Delete " + itemName,
+    nav,
+    errors: null,
+    inv_id: itemData.inv_id,
+    inv_make: itemData.inv_make,
+    inv_model: itemData.inv_model,
+    inv_year: itemData.inv_year,
+    inv_description: itemData.inv_description,
+    inv_price: itemData.inv_price,
+    inv_miles: itemData.inv_miles,
+    inv_color: itemData.inv_color
   })
 }
 

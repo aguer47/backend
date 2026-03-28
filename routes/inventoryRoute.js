@@ -23,8 +23,11 @@ router.get("/detail/:inv_id", utilities.handleErrors(invCont.buildByInventoryId)
 
 router.get("/edit/:inventory_id", utilities.handleErrors(invCont.editInventoryView))
 
-// Delete inventory item
-router.get("/delete/:inventory_id", utilities.handleErrors(invCont.deleteInventory))
+// Delete inventory item confirmation
+router.get("/delete/:inventory_id", utilities.handleErrors(invCont.buildDeleteView))
+
+// Process delete inventory item
+router.post("/delete", utilities.handleErrors(invCont.deleteInventory))
 
 // Add Classification
 router.get("/add-classification", utilities.handleErrors(invCont.buildAddClassification))

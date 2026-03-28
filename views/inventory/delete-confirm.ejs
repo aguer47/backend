@@ -1,0 +1,37 @@
+<%- include('../partials/header') %>
+
+<main class="delete-inventory">
+    <h1>Delete Vehicle</h1>
+
+    <div class="flash-message">
+        <%- messages() %>
+    </div>
+
+    <div class="delete-confirmation">
+        <h2>Confirm Deletion</h2>
+        <p>You are about to delete the following vehicle:</p>
+        
+        <div class="vehicle-details">
+            <h3><%= inv_make %> <%= inv_model %></h3>
+            <p><strong>Year:</strong> <%= inv_year %></p>
+            <p><strong>Price:</strong> $<%= inv_price %></p>
+            <p><strong>Color:</strong> <%= inv_color %></p>
+            <p><strong>Description:</strong> <%= inv_description %></p>
+        </div>
+
+        <div class="warning-message">
+            <p><strong>⚠️ Warning:</strong> This action cannot be undone. Once deleted, this vehicle information will be permanently removed from the database.</p>
+        </div>
+
+        <form action="/inv/delete" method="post" class="delete-form">
+            <input type="hidden" name="inv_id" value="<%= inv_id %>">
+            
+            <div class="form-actions">
+                <button type="submit" class="btn btn-danger">Delete Vehicle</button>
+                <a href="/inv/" class="btn btn-secondary">Cancel</a>
+            </div>
+        </form>
+    </div>
+</main>
+
+<%- include('../partials/footer') %>
