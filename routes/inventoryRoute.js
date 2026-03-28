@@ -10,7 +10,7 @@ const invValidate = require("../utilities/inventory-validation")
 
 
 
-router.get("/", utilities.handleErrors(invCont.buildManagement))
+router.get("/", utilities.checkEmployeeOrAdmin, utilities.handleErrors(invCont.buildManagement))
 
 // Show vehicles by classification
 router.get("/type/:classificationId", utilities.handleErrors(invCont.buildByClassificationId))
@@ -21,25 +21,27 @@ router.get("/getInventory/:classification_id", utilities.handleErrors(invCont.ge
 // Show vehicle details
 router.get("/detail/:inv_id", utilities.handleErrors(invCont.buildByInventoryId))
 
-router.get("/edit/:inventory_id", utilities.handleErrors(invCont.editInventoryView))
+router.get("/edit/:inventory_id", utilities.checkEmployeeOrAdmin, utilities.handleErrors(invCont.editInventoryView))
 
 // Delete inventory item confirmation
-router.get("/delete/:inventory_id", utilities.handleErrors(invCont.buildDeleteView))
+router.get("/delete/:inventory_id", utilities.checkEmployeeOrAdmin, utilities.handleErrors(invCont.buildDeleteView))
 
 // Process delete inventory item
-router.post("/delete", utilities.handleErrors(invCont.deleteInventory))
+router.post("/delete", utilities.checkEmployeeOrAdmin, utilities.handleErrors(invCont.deleteInventory))
 
 // Add Classification
-router.get("/add-classification", utilities.handleErrors(invCont.buildAddClassification))
+router.get("/add-classification", utilities.checkEmployeeOrAdmin, utilities.handleErrors(invCont.buildAddClassification))
 router.post("/add-classification",
+  utilities.checkEmployeeOrAdmin,
   invValidate.classificationRules(),
   invValidate.checkInventoryData,
   utilities.handleErrors(invCont.addClassification)
 )
 
 // Add Inventory
-router.get("/add-inventory", utilities.handleErrors(invCont.buildAddInventory))
+router.get("/add-inventory", utilities.checkEmployeeOrAdmin, utilities.handleErrors(invCont.buildAddInventory))
 router.post("/add-inventory",
+  utilities.checkEmployeeOrAdmin,
   invValidate.inventoryRules(),
   invValidate.checkInventoryData,
   utilities.handleErrors(invCont.addInventory)
@@ -48,6 +50,7 @@ router.post("/add-inventory",
 // Route to handle inventory update
 router.post(
   "/update/",
+  utilities.checkEmployeeOrAdmin,
   invValidate.inventoryRules(),
   invValidate.checkUpdateData,
   utilities.handleErrors(invCont.updateInventory)

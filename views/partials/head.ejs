@@ -4,20 +4,35 @@
 <title><%= title %> | CSE Motors</title>
 <link rel="stylesheet" href="/css/styles.css" media="screen">
 <script>
-function togglePassword(fieldId) {
-    const passwordField = document.getElementById(fieldId);
-    const toggleIcon = passwordField.nextElementSibling.querySelector('.password-toggle');
+document.addEventListener('DOMContentLoaded', function() {
+    const passwordToggles = document.querySelectorAll('.password-toggle');
     
-    if (passwordField.type === 'password') {
-        passwordField.type = 'text';
-        toggleIcon.textContent = '';
-        toggleIcon.setAttribute('aria-label', 'Hide password');
-    } else {
-        passwordField.type = 'password';
-        toggleIcon.textContent = '';
-        toggleIcon.setAttribute('aria-label', 'Show password');
-    }
-}
+    passwordToggles.forEach(function(toggle) {
+        toggle.addEventListener('click', function(e) {
+            e.preventDefault();
+            const passwordField = this.parentElement.querySelector('input[type="password"], input[type="text"]');
+            
+            if (passwordField) {
+                if (passwordField.type === 'password') {
+                    passwordField.type = 'text';
+                    this.textContent = '';
+                    this.setAttribute('aria-label', 'Hide password');
+                } else {
+                    passwordField.type = 'password';
+                    this.textContent = '';
+                    this.setAttribute('aria-label', 'Show password');
+                }
+            }
+        });
+        
+        toggle.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                this.click();
+            }
+        });
+    });
+});
 </script>
 <style>
 .password-toggle {

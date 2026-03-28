@@ -1,0 +1,75 @@
+<%- include('../partials/header') %>
+
+<main class="account-update">
+    <h1><%= title %></h1>
+
+    <div class="flash-message">
+        <%- messages() %>
+    </div>
+
+    <!-- Account Update Form -->
+    <section class="account-update-section">
+        <h2>Account Update</h2>
+        <form action="/account/update" method="post" class="account-form">
+            <div class="form-group">
+                <label for="firstname">First Name:</label>
+                <input type="text" id="firstname" name="firstname" value="<%= accountData.account_firstname || '' %>" required>
+                <% if (errors && errors.firstname) { %>
+                    <span class="error"><%= errors.firstname.msg %></span>
+                <% } %>
+            </div>
+
+            <div class="form-group">
+                <label for="lastname">Last Name:</label>
+                <input type="text" id="lastname" name="lastname" value="<%= accountData.account_lastname || '' %>" required>
+                <% if (errors && errors.lastname) { %>
+                    <span class="error"><%= errors.lastname.msg %></span>
+                <% } %>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email Address:</label>
+                <input type="email" id="email" name="email" value="<%= accountData.account_email || '' %>" required>
+                <% if (errors && errors.email) { %>
+                    <span class="error"><%= errors.email.msg %></span>
+                <% } %>
+            </div>
+
+            <input type="hidden" name="account_id" value="<%= accountData.account_id %>">
+            
+            <button type="submit" class="btn btn-primary">Update Account</button>
+        </form>
+    </section>
+
+    <!-- Change Password Form -->
+    <section class="password-change-section">
+        <h2>Change Password</h2>
+        <p>Enter a new password to change your current password. Password must be at least 12 characters long and contain at least one uppercase letter, one lowercase letter, one number, and one special character.</p>
+        
+        <form action="/account/change-password" method="post" class="password-form">
+            <div class="form-group">
+                <label for="new_password">New Password:</label>
+                <input type="password" id="new_password" name="new_password" required>
+                <button type="button" class="password-toggle" aria-label="Show password">👁</button>
+                <% if (errors && errors.new_password) { %>
+                    <span class="error"><%= errors.new_password.msg %></span>
+                <% } %>
+            </div>
+
+            <div class="form-group">
+                <label for="confirm_password">Confirm New Password:</label>
+                <input type="password" id="confirm_password" name="confirm_password" required>
+                <button type="button" class="password-toggle" aria-label="Show password">👁</button>
+                <% if (errors && errors.confirm_password) { %>
+                    <span class="error"><%= errors.confirm_password.msg %></span>
+                <% } %>
+            </div>
+
+            <input type="hidden" name="account_id" value="<%= accountData.account_id %>">
+            
+            <button type="submit" class="btn btn-warning">Change Password</button>
+        </form>
+    </section>
+</main>
+
+<%- include('../partials/footer') %>
