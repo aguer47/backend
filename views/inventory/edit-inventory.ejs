@@ -1,13 +1,17 @@
 <%- include('../partials/header') %>
 
-<main class="add-inventory">
-    <h1>Add New Vehicle</h1>
+<main class="edit-inventory">
+    <h1>Edit Vehicle</h1>
 
     <div class="flash-message">
         <%- messages() %>
     </div>
 
-    <form action="/inv/add-inventory" method="post" class="inventory-form">
+    <form action="/inv/update" method="post" class="inventory-form" id="updateForm">
+
+        <!-- Hidden field to send inventory_id -->
+        <input type="hidden" name="inv_id" value="<%= inv_id %>">
+
         <div class="form-group">
             <label for="inv_make">Make:</label>
             <input type="text" id="inv_make" name="inv_make" value="<%= inv_make || '' %>" required>
@@ -55,18 +59,20 @@
 
         <div class="form-group">
             <label for="inv_image">Image Path:</label>
-            <input type="text" id="inv_image" name="inv_image" value="<%= inv_image || '/images/vehicles/no-image.png' %>" required>
+            <input type="text" id="inv_image" name="inv_image"
+                value="<%= inv_image || '/images/vehicles/no-image.png' %>" required>
         </div>
 
         <div class="form-group">
             <label for="inv_thumbnail">Thumbnail Path:</label>
-            <input type="text" id="inv_thumbnail" name="inv_thumbnail" value="<%= inv_thumbnail || '/images/vehicles/no-image-tn.png' %>" required>
+            <input type="text" id="inv_thumbnail" name="inv_thumbnail"
+                value="<%= inv_thumbnail || '/images/vehicles/no-image-tn.png' %>" required>
         </div>
 
-        <button type="submit" class="btn btn-primary">Add Vehicle</button>
-
-        <input type="hidden" name="inv_id" <% if(locals.inv_id) { %> value="<%= locals.inv_id %>" <% } %>>
+        <button type="submit" class="btn btn-primary" disabled>Update Vehicle</button>
     </form>
 </main>
+
+<script src="/js/inv-update.js"></script>
 
 <%- include('../partials/footer') %>

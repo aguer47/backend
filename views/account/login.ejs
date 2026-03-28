@@ -9,8 +9,7 @@
         <a href="/account/register">Register here</a>
     </p>
 
-    <form method="post" action="/account/login" class="account-form">
-
+    <form id="loginForm" method="post" action="/account/login" class="account-form">
         <div class="form-group">
             <label for="account_email">Email</label>
             <input type="email" id="account_email" name="account_email" required>
@@ -18,11 +17,16 @@
 
         <div class="form-group">
             <label for="account_password">Password</label>
+            <div style="position: relative;">
+                <input type="password" id="account_password" name="account_password" required
+                    pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{12,}$">
+                <span class="password-toggle" onclick="togglePassword('account_password')">
+                    👁
+                </span>
+            </div>
             <small class="form-hint">
                 Must be at least 12 characters, include uppercase, lowercase, number, and special character
             </small>
-            <input type="password" id="account_password" name="account_password" required
-                pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{12,}$">
         </div>
 
         <button type="submit" class="btn-primary">Login</button>

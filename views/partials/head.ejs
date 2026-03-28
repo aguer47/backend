@@ -3,3 +3,41 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title><%= title %> | CSE Motors</title>
 <link rel="stylesheet" href="/css/styles.css" media="screen">
+<script>
+function togglePassword(fieldId) {
+    const passwordField = document.getElementById(fieldId);
+    const toggleIcon = passwordField.nextElementSibling.querySelector('.password-toggle');
+    
+    if (passwordField.type === 'password') {
+        passwordField.type = 'text';
+        toggleIcon.textContent = '';
+        toggleIcon.setAttribute('aria-label', 'Hide password');
+    } else {
+        passwordField.type = 'password';
+        toggleIcon.textContent = '';
+        toggleIcon.setAttribute('aria-label', 'Show password');
+    }
+}
+</script>
+<style>
+.password-toggle {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    user-select: none;
+    background: none;
+    border: none;
+    font-size: 16px;
+    padding: 5px;
+    border-radius: 3px;
+}
+.password-toggle:hover {
+    background-color: rgba(0,0,0,0.1);
+}
+.password-toggle:focus {
+    outline: 2px solid #007bff;
+    outline-offset: 2px;
+}
+</style>

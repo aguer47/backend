@@ -19,6 +19,33 @@
             </a>
         </p>
     </nav>
+
+    <div class="inventory-content">
+        <h2>Select a Classification</h2>
+        <p>Tell us which classification you want to manage.</p>
+        
+        <div class="classification-select">
+            <%- classificationSelect %>
+        </div>
+
+        <h2>Inventory Items</h2>
+        <table id="inventoryDisplay">
+            <thead>
+                <tr>
+                    <th>Vehicle Name</th>
+                    <th>Actions</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Inventory items will be loaded here via JavaScript -->
+            </tbody>
+        </table>
+
+        <noscript>JavaScript must be enabled to use this page.</noscript>
+    </div>
+
+    <script src="/js/inventory.js"></script>
 </main>
 
 <%- include('../partials/footer') %>

@@ -9,19 +9,28 @@ const utilities = require("../utilities/")
 const invValidate = require("../utilities/inventory-validation")
 
 
+
 router.get("/", utilities.handleErrors(invCont.buildManagement))
 
 // Show vehicles by classification
 router.get("/type/:classificationId", utilities.handleErrors(invCont.buildByClassificationId))
 
+// Get inventory items as JSON for AJAX requests
+router.get("/getInventory/:classification_id", utilities.handleErrors(invCont.getInventoryJSON))
+
 // Show vehicle details
 router.get("/detail/:inv_id", utilities.handleErrors(invCont.buildByInventoryId))
+
+router.get("/edit/:inventory_id", utilities.handleErrors(invCont.editInventoryView))
+
+// Delete inventory item
+router.get("/delete/:inventory_id", utilities.handleErrors(invCont.deleteInventory))
 
 // Add Classification
 router.get("/add-classification", utilities.handleErrors(invCont.buildAddClassification))
 router.post("/add-classification",
   invValidate.classificationRules(),
-  invValidate.checkData,
+  invValidate.checkInventoryData,
   utilities.handleErrors(invCont.addClassification)
 )
 
@@ -29,8 +38,16 @@ router.post("/add-classification",
 router.get("/add-inventory", utilities.handleErrors(invCont.buildAddInventory))
 router.post("/add-inventory",
   invValidate.inventoryRules(),
-  invValidate.checkData,
+  invValidate.checkInventoryData,
   utilities.handleErrors(invCont.addInventory)
+)
+
+// Route to handle inventory update
+router.post(
+  "/update/",
+  invValidate.inventoryRules(),
+  invValidate.checkUpdateData,
+  utilities.handleErrors(invCont.updateInventory)
 )
 
 // Route to trigger intentional error (for testing)

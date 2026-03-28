@@ -5,6 +5,7 @@ const session = require("express-session")
 const pool = require('./database/')
 const express = require("express")
 const expressLayouts = require("express-ejs-layouts")
+const cookieParser = require("cookie-parser")
 
 const app = express()
 
@@ -44,6 +45,9 @@ const inventoryRoute = require("./routes/inventoryRoute")
   saveUninitialized: true,
   name: 'sessionId',
  }))
+app.use(cookieParser())
+ 
+app.use(utilities.checkJWTToken)
 
  // Express Messages Middleware
 app.use(require('connect-flash')())

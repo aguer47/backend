@@ -1,5 +1,5 @@
-
 const { body, validationResult } = require("express-validator")
+const utilities = require("./index") // make sure this path is correct
 
 /* Inventory form validation rules */
 function inventoryRules() {
@@ -63,22 +63,71 @@ function classificationRules() {
   ]
 }
 
-/* Check validation results */
-function checkData(req, res, next) {
+/* Check data for ADD inventory */
+async function checkInventoryData(req, res, next) {
   const errors = validationResult(req)
+
   if (!errors.isEmpty()) {
-    req.errors = errors.array().reduce((acc, err) => {
-      acc[err.param] = err
-      return acc
-    }, {})
-    return next()
+    let nav = await utilities.getNav()
+    let classificationList = await utilities.buildClassificationList()
+
+    return res.render("inventory/add-inventory", {
+      title: "Add New Vehicle",
+      nav,
+      classificationList,
+      errors,
+      ...req.body
+    })
   }
-  req.errors = null
+  next()
+}
+
+/* Check data for UPDATE inventory */
+async function checkUpdateData(req, res, next) {
+  const errors = validationResult(req)
+
+  const {
+    inv_make,
+    inv_model,
+    inv_description,
+    inv_price,
+    inv_year,
+    inv_miles,
+    inv_color,
+    inv_image,
+    inv_thumbnail,
+    classification_id,
+    inv_id
+  } = req.body
+
+  if (!errors.isEmpty()) {
+    let nav = await utilities.getNav()
+    let classificationList = await utilities.buildClassificationList(classification_id)
+
+    return res.render("inventory/edit-inventory", {
+      title: "Edit Vehicle",
+      nav,
+      classificationList,
+      errors,
+      inv_id,
+      inv_make,
+      inv_model,
+      inv_description,
+      inv_price,
+      inv_year,
+      inv_miles,
+      inv_color,
+      inv_image,
+      inv_thumbnail,
+      classification_id
+    })
+  }
   next()
 }
 
 module.exports = {
   inventoryRules,
   classificationRules,
-  checkData,
+  checkInventoryData,
+  checkUpdateData
 }
