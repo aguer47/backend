@@ -71,4 +71,19 @@ router.get(
   utilities.handleErrors(accountController.logout)
 )
 
+
+// Add to favorites
+router.post(
+  "/favorite",
+  utilities.checkLogin,
+  utilities.handleErrors(accountController.addFavorite)
+)
+
+// View favorites
+router.get(
+  "/favorites",
+  utilities.checkLogin,
+  utilities.handleErrors(accountController.buildFavorites)
+)
+
 module.exports = router

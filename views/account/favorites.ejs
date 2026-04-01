@@ -1,0 +1,141 @@
+<%- include('../partials/header') %>
+
+<main class="favorites-page">
+    <h1><%= title %></h1>
+
+    <div class="flash-message">
+        <%- messages() %>
+    </div>
+
+    <div class="favorites-container">
+        <% if (favorites && favorites.length > 0) { %>
+            <div class="favorites-grid">
+                <% favorites.forEach(item => { %>
+                    <div class="favorite-item">
+                        <div class="vehicle-info">
+                            <h3><%= item.inv_make %> <%= item.inv_model %></h3>
+                            <p class="year"><%= item.inv_year %></p>
+                            <p class="price">$<%= Number(item.inv_price).toLocaleString() %></p>
+                            <p class="description"><%= item.inv_description %></p>
+                            <div class="vehicle-details">
+                                <span class="miles"><%= Number(item.inv_miles).toLocaleString() %> miles</span>
+                                <span class="color"><%= item.inv_color %></span>
+                            </div>
+                        </div>
+                        <div class="vehicle-actions">
+                            <a href="/inv/detail/<%= item.inv_id %>" class="btn btn-primary">View Details</a>
+                        </div>
+                    </div>
+                <% }) %>
+            </div>
+        <% } else { %>
+            <div class="no-favorites">
+                <h2>No favorites yet</h2>
+                <p>You haven't added any vehicles to your favorites yet. Start exploring our inventory and add your favorite vehicles!</p>
+                <a href="/inv/" class="btn btn-secondary">Browse Inventory</a>
+            </div>
+        <% } %>
+    </div>
+</main>
+
+<style>
+.favorites-page {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.favorites-container {
+    margin-top: 20px;
+}
+
+.favorites-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.favorite-item {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    background: #fff;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    transition: transform 0.2s ease;
+}
+
+.favorite-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+.favorite-item h3 {
+    margin: 0 0 10px 0;
+    color: #333;
+}
+
+.favorite-item .year {
+    color: #666;
+    margin: 0 0 10px 0;
+    font-weight: 500;
+}
+
+.favorite-item .price {
+    color: #2c5aa0;
+    font-size: 1.2em;
+    font-weight: bold;
+    margin: 0 0 15px 0;
+}
+
+.favorite-item .description {
+    color: #555;
+    margin: 0 0 15px 0;
+    line-height: 1.4;
+}
+
+.vehicle-details {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.vehicle-details span {
+    font-size: 0.9em;
+    color: #666;
+}
+
+.vehicle-actions {
+    text-align: right;
+}
+
+.no-favorites {
+    text-align: center;
+    padding: 60px 20px;
+    background: #f8f9fa;
+    border-radius: 8px;
+}
+
+.no-favorites h2 {
+    color: #666;
+    margin-bottom: 15px;
+}
+
+.no-favorites p {
+    color: #888;
+    margin-bottom: 25px;
+}
+
+@media (max-width: 768px) {
+    .favorites-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .vehicle-details {
+        flex-direction: column;
+        gap: 5px;
+    }
+}
+</style>
+
+<%- include('../partials/footer') %>

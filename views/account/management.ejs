@@ -10,7 +10,10 @@
     <div class="account-info">
         <h2>Welcome <%= accountData.account_firstname %></h2>
         
-        <a href="/account/update" class="btn btn-primary">Update Account Information</a>
+        <div class="account-actions">
+            <a href="/account/update" class="btn btn-primary">Update Account Information</a>
+            <a href="/account/favorites" class="btn btn-favorite">⭐ My Favorites</a>
+        </div>
 
         <% if (accountData.account_type === 'Employee' || accountData.account_type === 'Admin') { %>
             <div class="inventory-management-section">
@@ -22,5 +25,38 @@
         <% } %>
     </div>
 </main>
+
+<style>
+.account-actions {
+    margin: 20px 0;
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.btn-favorite {
+    background: linear-gradient(45deg, #ffd700, #ffed4e);
+    color: #333;
+    text-decoration: none;
+    padding: 12px 24px;
+    border-radius: 4px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(255, 215, 0, 0.3);
+}
+
+.btn-favorite:hover {
+    background: linear-gradient(45deg, #ffed4e, #ffd700);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(255, 215, 0, 0.4);
+}
+
+@media (max-width: 768px) {
+    .account-actions {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+</style>
 
 <%- include('../partials/footer') %>

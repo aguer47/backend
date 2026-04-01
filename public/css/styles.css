@@ -428,3 +428,10 @@ input:required:valid {
   margin: 1rem 0;
   text-decoration: none;
 }
+
+
+button[type="submit"] {
+  padding: 8px;
+  cursor: pointer;
+}
+

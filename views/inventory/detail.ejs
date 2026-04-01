@@ -1,3 +1,59 @@
 <h1><%= vehicle.inv_make %> <%= vehicle.inv_model %></h1>
 
 <%- detail %>
+
+<div class="favorite-section">
+    <% if (typeof loggedin !== 'undefined' && loggedin) { %>
+        <form method="post" action="/account/favorite" class="favorite-form">
+            <input type="hidden" name="inv_id" value="<%= vehicle.inv_id %>">
+            <button type="submit" class="btn btn-favorite">
+                ⭐ Add to Favorites
+            </button>
+        </form>
+    <% } else { %>
+        <div class="login-prompt">
+            <p><a href="/account/login" class="btn btn-secondary">Log in</a> to add to favorites</p>
+        </div>
+    <% } %>
+</div>
+
+<style>
+.favorite-section {
+    margin: 20px 0;
+    padding: 15px 0;
+    border-top: 1px solid #eee;
+}
+
+.favorite-form {
+    display: inline-block;
+}
+
+.btn-favorite {
+    background: linear-gradient(45deg, #ffd700, #ffed4e);
+    color: #333;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 25px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(255, 215, 0, 0.3);
+}
+
+.btn-favorite:hover {
+    background: linear-gradient(45deg, #ffed4e, #ffd700);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(255, 215, 0, 0.4);
+}
+
+.login-prompt {
+    text-align: center;
+    padding: 15px;
+    background: #f8f9fa;
+    border-radius: 8px;
+}
+
+.login-prompt a {
+    text-decoration: none;
+}
+</style>

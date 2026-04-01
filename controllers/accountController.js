@@ -4,7 +4,43 @@ const jwt = require("jsonwebtoken")
 const bcrypt = require("bcryptjs")
 require("dotenv").config()
 
+
+
 const accountController = {}
+const favoriteModel = require("../models/favoriteModel")
+
+/* Add favorite */
+accountController.addFavorite = async function (req, res, next) {
+  try {
+    const { inv_id } = req.body
+    const account_id = res.locals.accountData.account_id
+
+    await favoriteModel.addFavorite(account_id, inv_id)
+
+    res.redirect("/account/favorites")
+  } catch (error) {
+    next(error)
+  }
+}
+
+/* Show favorites */
+accountController.buildFavorites = async function (req, res, next) {
+  try {
+    let nav = await utilities.getNav()
+    const account_id = res.locals.accountData.account_id
+
+    const data = await favoriteModel.getFavoritesByAccount(account_id)
+
+    res.render("account/favorites", {
+      title: "My Favorites",
+      nav,
+      favorites: data.rows,
+      errors: null
+    })
+  } catch (error) {
+    next(error)
+  }
+}
 
 accountController.buildRegister = async function (req, res, next) {
   try {
@@ -18,6 +54,8 @@ accountController.buildRegister = async function (req, res, next) {
     next(error)
   }
 }
+
+
 
 accountController.buildAccountUpdate = async function (req, res, next) {
   try {
